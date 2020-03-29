@@ -1,0 +1,305 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+	     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="./main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>COVIDSTATS
+	</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    
+	 <style>
+.mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+  max-height: 10%;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #595252;
+  color: white;
+}
+input[type=text] {
+  width: 40%px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 19px;
+  background-color: white;
+  background-image: url('https://pngimage.net/searchicon-png-3/');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 5px 20px 5px 40px;
+  padding-left: 0px
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 95%;
+}
+form.example button {
+  float: left;
+  width: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 19px;
+  border: 1px solid grey;
+  border-right:none;
+border-radius: 4px;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.contact-section {
+  padding-top: 75px;
+  padding-bottom: 80px;
+}
+
+.contact-title {
+  margin-bottom: 30px;
+}
+
+.contact-title h4 {
+  color: #252525;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.contact-widget .cw-item {
+  background: #ffffff;
+  margin-bottom: 11px;
+  -webkit-box-shadow: 0px 8px 35px 10px #E8E8E8;
+  box-shadow: 0px 8px 35px 10px #E8E8E8;
+  padding-left: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+}
+
+.contact-widget .cw-item .ci-icon {
+  float: left;
+  margin-top: 12px;
+}
+
+.contact-widget .cw-item .ci-icon i {
+  font-size: 30px;
+  color: #b2b2b2;
+}
+
+.contact-widget .cw-item .ci-text {
+  display: table;
+  padding-left: 30px;
+}
+
+.contact-widget .cw-item .ci-text span {
+  color: #b2b2b2;
+  font-size: 16px;
+}
+
+.contact-widget .cw-item .ci-text p {
+  font-size: 18px;
+  color: #252525;
+  margin-bottom: 0;
+}
+
+.contact-form .leave-comment h4 {
+  color: #292f3b;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.contact-form .leave-comment p {
+  margin-bottom: 38px;
+}
+
+.contact-form .leave-comment .comment-form input {
+  width: 100%;
+  font-size: 16px;
+  color: #636363;
+  height: 50px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+.contact-form .leave-comment .comment-form textarea {
+  width: 100%;
+  resize: none;
+  font-size: 16px;
+  color: #636363;
+  height: 150px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-top: 10px;
+  margin-bottom: 35px;
+}
+
+.contact-form .leave-comment .comment-form .site-btn {
+  padding: 13px 35px 11px;
+}
+
+.copyright-text {
+  float: left;
+  font-size: 16px;
+  color: #b2b2b2;
+}
+.footer-section {
+  background: #191919;
+  padding-top: 75px;
+}
+</style>
+   
+	</head>
+	<body>
+		<div class="topnav">
+  <a href="main.html" ><span style="font-family: 'Lobster', cursive;font-size: large;">COVIDSTATS</span></a>
+  <div id="myLinks">
+    <a href="/">Dashboard</a>
+    <a href="/rank/">World List</a>
+    <a href="/sug/" class="active">Suggestions</a>
+  </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+ <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="contact-title">
+                        <h4>Contacts Us</h4>
+                        <p>Hello guys,We are team Smit&Smit.We are novice developers making a small effort.If you have any suggestion or query regarding this website or do want to support us please contact us at following.</p>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>E-mail:1</span>
+                                <p>smitrami7890@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>E-mail:2</span>
+                                <p>smit3355mistry@gmail.com</p>
+                            </div>
+                        </div>
+                       <!--  <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="ti-email"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>Email:</span>
+                                <p>hellocolorlib@gmail.com</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="contact-form">
+                        <div class="leave-comment">
+                            <h4>Leave A Comment</h4>
+                            <p>We will reach back later and answer your questions.</p>
+                            <form method="post" class="comment-form">
+                                {% csrf_token %}
+                                                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text" name="name" maxlength="50" required="" id="id_name" placeholder="Your name">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="number" name="mob" min="-9223372036854775808" max="9223372036854775807" required="" id="id_mob" placeholder="Your Number">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <textarea id="id_msg" name="msg" maxlength="1000" required="" placeholder="Your message"></textarea>
+                                        <button type="submit" class="site-btn" style="background-color: #e7ab3c;border-radius: 7px;">Send message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+     <footer>
+       <footer  >
+       <div class="col-lg-12">
+                        <div class="copyright-text">This website is created by SMIT&SMIT.<br>
+                            For more information about COVID-19 visit <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">https://www.who.int/</a>
+                        </div>
+                      </div>
+                    </footer>
+<script>
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+  </body>
+</html>

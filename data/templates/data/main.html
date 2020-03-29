@@ -1,0 +1,431 @@
+{% load static %}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+	<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	 <link href="{% static 'main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawTitleSubtitle);
+
+        function drawTitleSubtitle() {
+            var data = google.visualization.arrayToDataTable([
+                ['Nation', 'Total Cases', 'Total Deaths'],
+                {% for g in top_t %}
+                    ['{{ g.Country }}',{{ g.TotalConfirmed }}, {{g.TotalDeaths }}],
+                {% endfor %}
+
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: 'The Top 10 corona-affected countries',
+                    /*subtitle: 'Based on World health organisations and respective gov. data'*/
+                },
+                hAxis: {
+                    title: 'Total Population',
+                    minValue: 0,
+                },
+                vAxis: {
+                    title: 'City',
+                   
+                },
+                bars: 'horizontal'
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+            materialChart.draw(data, materialOptions);
+        }
+        
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Phase', 'Patients'],
+                ['Treatment', {{ selected_tret }}],
+                ['Death', {{ selected_dead }}],
+                ['Recovered', {{ selected_rec }}]
+            ]);
+
+            var options = {
+                title: ''
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+    
+     <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Confirmed cases'],
+          ['Greenland', -20000],
+          {% for country in list %}
+          ['{{ country.Country }}', {{ country.TotalConfirmed }}],
+          {% endfor %}
+
+
+        ]);
+
+         var options = {
+                colors:['#FF0000']
+            };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
+    <style>
+.mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+.alert{
+    padding:20px;
+    color:#f44336;
+    font-size:20;
+
+    border-radius:6px;
+
+}
+.topnav {
+  overflow: visible;
+  background-color: #333;
+  position: relative;
+  max-height: 40%;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #595252;
+  color: white;
+}
+input[type=text] {
+  width: 40%px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 19px;
+  background-color: white;
+  background-image: url('https://pngimage.net/searchicon-png-3/');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 5px 20px 5px 40px;
+  padding-left: 0px
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 95%;
+}
+form.example button {
+  float: left;
+  width: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 19px;
+  border: 1px solid grey;
+  border-right:none;
+border-radius: 4px;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.copyright-text {
+  float: left;
+  font-size: 16px;
+  color: #b2b2b2;
+}
+.footer-section {
+  background: #191919;
+  padding-top: 75px;
+}
+.rami{
+    font-family:'Merriweather', serif;
+    font-weight:bolder;
+    font-size:auto;
+}
+</style>
+  
+   <title>COVIDSTATS</title>
+</head>
+	<body>
+
+<!-- Top Navigation Menu -->
+<div class="topnav">
+  <a href="#" ><span style="font-family: 'Lobster', cursive;font-size: large;">COVIDSTATS</span></a>
+  <div id="myLinks">
+    <a href="/" class="active">Dashboard</a>
+    <a href="/rank/">World List</a>
+    <a href="/sug/">Suggestions</a>
+  </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+			<div class="app-main__outer" >
+                    <div class="app-main__inner">
+                        <div class="app-page-title">
+                            <div class="page-title-wrapper">
+                                <div class="page-title-heading">
+                                    <div class="page-title-icon">
+                                        <i class="fa fa-globe"></i>
+                                        </i>
+                                    </div>
+                                    <div >Global Report
+                                        <div class="page-title-subheading">This Report is based on W.H.O. report.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+           </div>
+		
+			<hr/>
+		<div class="row">
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-midnight-bloom">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Cases</div>
+                                            <!-- <div class="widget-subheading">Confirmed</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ all_con }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-arielle-smile">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Death Toll</div>
+                                            <!-- <div class="widget-subheading">13000</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ all_dead }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-grow-early">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Recovered</div>
+                                            <!-- <div class="widget-subheading">Gl</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ all_rec }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-arielle-smile">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Fatality Rate</div>
+                                            <!-- <div class="widget-subheading">13000</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ death_rate }}%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        <div class="container-fluid">            
+		<div class="border-box" style="border:1px solid grey">
+        <div id="regions_div" style="width:100%;height: 70%"></div>
+		</div>
+		<div id="chart_div" style="width:100%;height: 80%"></div>
+		
+		
+			
+		
+        
+        <hr/>
+        
+        <div class="app-main__outer" >
+                    <div class="app-main__inner">
+                        <div class="app-page-title">
+                            <div class="page-title-wrapper">
+                                <div class="page-title-heading">
+                                    <div class="page-title-icon">
+                                        <i class="fa fa-flag"></i>
+                                        </i>
+                                    </div>
+                                    <div >National Report
+                                        <div class="page-title-subheading">This Report is based on W.H.O. report.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+           </div>
+		
+			<hr/>
+			<section id="home_section">
+				<br/>
+<form method="post" class="example" action="#home_section">
+        {% csrf_token %}
+        <input type="text" name="country_name" maxlength="40" required="" id="id_country_name" placeholder="Search for Nation...">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+                <div class="alert">
+                    <strong>{{error}}</strong>
+
+                </div>
+<hr/>
+		<div class="row">
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-midnight-bloom">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Cases</div>
+                                            <!-- <div class="widget-subheading">Confirmed</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ selected_con }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-arielle-smile">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Death Toll</div>
+                                            <!-- <div class="widget-subheading">13000</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ selected_dead }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-grow-early">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Recovered</div>
+                                            <!-- <div class="widget-subheading">Gl</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ selected_rec }}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 ">
+                                <div class="card mb-3 widget-content bg-arielle-smile">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Fatality Rate</div>
+                                            <!-- <div class="widget-subheading">13000</div> -->
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{ sel_death_rate }}%</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid" style="min-height: 500px">	
+         <div class="row">
+         	<div class="col-md-12">
+         		<h2 style="text-align: center;color:#1c0d0d;" class="rami"><img src="https://www.countryflags.io/{{ code }}/shiny/32.png" style="display: inline;"> {{ selected_name }}</h2>
+         	</div>
+         <div class="col-md-12">                
+        <div id="piechart"  style="width:100%;height: 100%;min-height: 500px;min-width: 400px"></div>
+        </div>
+       </div>
+</div>
+<footer  >
+       <div class="col-lg-12">
+                        <div class="copyright-text">This website is created by SMIT&SMIT.<br>
+                            For more information about COVID-19 visit <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">https://www.who.int/</a>
+                        </div>
+                      </div>
+                    </footer>
+<script>
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+	</body>
+</html>
