@@ -11,3 +11,4 @@ If you want to see the website visit here..
 http://smit37covidstatus.pythonanywhere.com/
 
 This is website for covid 19 live stats.
+MUST VISIT IT>
